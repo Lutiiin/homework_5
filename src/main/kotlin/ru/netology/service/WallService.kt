@@ -2,7 +2,7 @@ package ru.netology.service
 
 import ru.netology.data.Post
 
-object WallService {
+class WallService {
     private var posts = emptyArray<Post>()
     private var nextId = 0
 
@@ -13,35 +13,38 @@ object WallService {
         return posts.last()
     }
 
-    fun update(post: Post) {
-        for((index, post) in posts.withIndex()){
-            if (post.id == nextId){
-                nextId +=1
+    fun update(post: Post): Boolean {
+        for((index, existPost) in posts.withIndex()){
+            if (existPost.id == post.id){
                 posts[index] = post.copy(
-                    id = nextId,
-                    fromId = 1,
-                    createdBy = 1,
-                    text = "Some text",
-                    replyOwnerId = 1,
-                    replyPostId = 1,
-                    friendsOnly = true,
-                    comments = {},
-                    copyright = {},
-                    likes = {},
-                    reposts = {},
-                    views = {},
-                    postType = "Some type",
-                    signerId = 6,
-                    canPin = true,
-                    canDelete = true,
-                    canEdit = true,
-                    isPinned = 6,
-                    markedAsAds = true,
-                    isFavourite = true,
-                    donut = {},
-                    postponedId = 9
+                    id = existPost.id,
+                    ownerId = existPost.ownerId,
+                    fromId = post.fromId,
+                    createdBy = post.createdBy,
+                    date = post.date,
+                    text = post.text,
+                    replyOwnerId = post.replyOwnerId,
+                    replyPostId = post.replyPostId,
+                    friendsOnly = post.friendsOnly,
+                    comments = post.comments,
+                    copyright = post.copyright,
+                    likes = post.likes,
+                    reposts = post.reposts,
+                    views = post.views,
+                    postType = post.postType,
+                    signerId = post.signerId,
+                    canPin = post.canPin,
+                    canDelete = post.canDelete,
+                    canEdit = post.canEdit,
+                    isPinned = post.isPinned,
+                    markedAsAds = post.markedAsAds,
+                    isFavourite = post.isFavourite,
+                    donut = post.donut,
+                    postponedId = post.postponedId
                 )
+                return true
             }
         }
+        return false
     }
 }
