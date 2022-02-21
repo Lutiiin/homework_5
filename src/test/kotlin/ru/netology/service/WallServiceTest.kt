@@ -65,7 +65,7 @@ class WallServiceTest {
             signerId = 25))
 
         val update = Post(
-            id = 0,
+            id = 2,
             ownerId = 23,
             fromId = 65,
             createdBy = 3,
